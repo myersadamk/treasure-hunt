@@ -1,4 +1,4 @@
-package exigentech.codility.practice;
+package exigentech.treasure.practice;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
