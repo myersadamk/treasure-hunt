@@ -11,18 +11,6 @@
   </parent>
   <packaging>jar</packaging>
   <dependencies>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.immutables</groupId>
-      <artifactId>value</artifactId>
-      <version>RELEASE</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
   <build>
     <plugins>

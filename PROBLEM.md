@@ -16,10 +16,11 @@ completeness, and style. Instructions on compilation and execution of your code
 will be greatly appreciated.  You are welcome to use any version of Java that
 you prefer.  Please complete the problem and send it back to me within 48 hours
 of your requested start time.  If you have any questions or concerns please
-contact me via e-mail at ddelsignore@rolledalloys.com.
+contact me via e-mail at xxx@omitted.com.
 
-Problem  - Find the treasure fast!
-===================================
+*Good luck!*
+
+## Problem  - Find the treasure fast!
 A treasure map was uncovered, but the map only shows the starting location. The
 path from the origin to the treasure is given as series of steps.
 
@@ -47,8 +48,7 @@ into input which is ready for your program.
 Write a program to parse the following input to determine the location of the
 final destination.
 
-Example input:
---------------
+## Example input:
 Walk, 20 mins, N
 Run, 1 hour, E
 Horse trot, 3 hours, NW
@@ -58,8 +58,5 @@ Walk, 30 mins, SW
 Horse trot, 1 hour 1 min, W
 ...
 
-Example output:
----------------
+## Example output:
 2029.1 miles to the north, 298893.0 miles to the east
-
-Good luck!

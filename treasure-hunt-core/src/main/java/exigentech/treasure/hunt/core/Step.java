@@ -9,7 +9,7 @@ import org.immutables.value.Value;
 import org.immutables.value.Value.Style.ImplementationVisibility;
 
 @Value.Immutable(builder = false)
-@Value.Style(allParameters = true, visibility = ImplementationVisibility.PRIVATE)
+@Value.Style(allParameters = true, visibility = ImplementationVisibility.PACKAGE)
 public interface Step {
 
   Direction getDirection();

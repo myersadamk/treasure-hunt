@@ -18,20 +18,14 @@ import java.util.Map;
  */
 public final class NaiveStrategy implements HuntingStrategy {
 
-  private final List<Step> steps;
-
-  public NaiveStrategy(List<Step> steps) {
-    checkArgument(steps != null);
-    this.steps = ImmutableList.copyOf(steps);
-  }
-
   /**
    * {@inheritDoc}
    * @return Non-null, possibly empty list containing a naive set of steps to follow to reach the
    *  treasure.
    */
   @Override
-  public List<Step> getSteps() {
+  public List<Step> getSteps(List<Step> steps) {
+    checkArgument(steps != null);
     return steps;
   }
 }
