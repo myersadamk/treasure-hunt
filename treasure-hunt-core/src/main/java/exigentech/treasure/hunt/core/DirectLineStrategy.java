@@ -10,11 +10,13 @@ import exigentech.treasure.hunt.core.navigation.Direction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Component;
 
 /**
  * {@linkplain HuntingStrategy} that simplifies a List of {@linkplain Step}s into one that can be
  * followed in a straight line.
  */
+@Component
 public final class DirectLineStrategy implements HuntingStrategy {
 
   private final Map<Direction, List<Step>> allStepsByDirection;
