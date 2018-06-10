@@ -2,14 +2,14 @@ package exigentech.treasure.hunt.core;
 
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.E;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.N;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.NE;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.NW;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.S;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.SE;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.SW;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.W;
+import static exigentech.treasure.hunt.core.navigation.Direction.E;
+import static exigentech.treasure.hunt.core.navigation.Direction.N;
+import static exigentech.treasure.hunt.core.navigation.Direction.NE;
+import static exigentech.treasure.hunt.core.navigation.Direction.NW;
+import static exigentech.treasure.hunt.core.navigation.Direction.S;
+import static exigentech.treasure.hunt.core.navigation.Direction.SE;
+import static exigentech.treasure.hunt.core.navigation.Direction.SW;
+import static exigentech.treasure.hunt.core.navigation.Direction.W;
 import static java.util.stream.Collectors.groupingBy;
 
 import exigentech.treasure.hunt.core.navigation.Direction;
@@ -22,12 +22,12 @@ import java.util.stream.Stream;
  * {@linkplain HuntingStrategy} that simplifies a List calculate {@linkplain Distance}s into one
  * that can be followed in a straight line.
  */
-public final class DirectLineStrategy implements HuntingStrategy {
+public final class DirectStrategy implements HuntingStrategy {
 
   private final Map<Direction, List<Distance>> allDistancesByDirection;
   private List<Distance> distances = null;
 
-  public DirectLineStrategy(List<Distance> distances) {
+  public DirectStrategy(List<Distance> distances) {
     checkArgument(distances != null);
     allDistancesByDirection = distances.stream().collect(groupingBy(Distance::getDirection));
   }

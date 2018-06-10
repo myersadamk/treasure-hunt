@@ -1,14 +1,14 @@
 package exigentech.treasure.hunt.core;
 
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.E;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.N;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.S;
+import static exigentech.treasure.hunt.core.navigation.Direction.E;
+import static exigentech.treasure.hunt.core.navigation.Direction.N;
+import static exigentech.treasure.hunt.core.navigation.Direction.S;
 import static exigentech.treasure.hunt.core.navigation.TransportMode.RUN;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import exigentech.treasure.hunt.core.navigation.CardinalDirection;
+import exigentech.treasure.hunt.core.navigation.Direction;
 import exigentech.treasure.hunt.core.navigation.TransportMode;
 import java.time.Duration;
 import org.junit.jupiter.api.Nested;
@@ -19,8 +19,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 final class DistanceTest {
 
   @ParameterizedTest
-  @EnumSource(CardinalDirection.class)
-  void allDirectionsAreSupported(final CardinalDirection direction) {
+  @EnumSource(Direction.class)
+  void allDirectionsAreSupported(final Direction direction) {
     assertThat(
         Distance.calculate(direction, Duration.ofHours(1), RUN),
         is(Distance.calculate(direction, RUN.getMPH()))

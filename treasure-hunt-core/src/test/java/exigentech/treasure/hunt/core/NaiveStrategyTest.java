@@ -1,7 +1,7 @@
 package exigentech.treasure.hunt.core;
 
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.N;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.S;
+import static exigentech.treasure.hunt.core.navigation.Direction.N;
+import static exigentech.treasure.hunt.core.navigation.Direction.S;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;

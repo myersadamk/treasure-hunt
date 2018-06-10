@@ -1,14 +1,14 @@
 package exigentech.treasure.hunt.core;
 
 
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.E;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.N;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.NE;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.NW;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.S;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.SE;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.SW;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.W;
+import static exigentech.treasure.hunt.core.navigation.Direction.E;
+import static exigentech.treasure.hunt.core.navigation.Direction.N;
+import static exigentech.treasure.hunt.core.navigation.Direction.NE;
+import static exigentech.treasure.hunt.core.navigation.Direction.NW;
+import static exigentech.treasure.hunt.core.navigation.Direction.S;
+import static exigentech.treasure.hunt.core.navigation.Direction.SE;
+import static exigentech.treasure.hunt.core.navigation.Direction.SW;
+import static exigentech.treasure.hunt.core.navigation.Direction.W;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -19,16 +19,16 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 
-final class DirectLineStrategyTest {
+final class DirectStrategyTest {
 
   @Test
   void noSteps() {
-    assertThat(new DirectLineStrategy(List.of()).getDistances(), is(empty()));
+    assertThat(new DirectStrategy(List.of()).getDistances(), is(empty()));
   }
 
   @Test
   void nullList() {
-    assertThrows(IllegalArgumentException.class, () -> new DirectLineStrategy(null));
+    assertThrows(IllegalArgumentException.class, () -> new DirectStrategy(null));
   }
 
   @ParameterizedTest
@@ -135,6 +135,6 @@ final class DirectLineStrategyTest {
   }
 
   private static List<Distance> applyDirectLineStrategy(List<Distance> distances) {
-    return new DirectLineStrategy(distances).getDistances();
+    return new DirectStrategy(distances).getDistances();
   }
 }

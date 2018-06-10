@@ -1,6 +1,6 @@
 package exigentech.treasure.hunt.core;
 
-import exigentech.treasure.hunt.core.navigation.CardinalDirection;
+import exigentech.treasure.hunt.core.navigation.Direction;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +40,7 @@ final class StepArgumentProvider implements ArgumentsProvider, AnnotationConsume
       throw new IllegalArgumentException("Expected format NW:2");
     }
     return Distance.calculate(
-        CardinalDirection.valueOf(tokenized[0]), Double.valueOf(tokenized[1])
+        Direction.valueOf(tokenized[0]), Double.valueOf(tokenized[1])
     );
   }
 }

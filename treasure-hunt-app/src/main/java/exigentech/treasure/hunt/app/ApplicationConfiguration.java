@@ -1,7 +1,7 @@
 package exigentech.treasure.hunt.app;
 
 import exigentech.treasure.hunt.app.input.FileStepSource;
-import exigentech.treasure.hunt.core.DirectLineStrategy;
+import exigentech.treasure.hunt.core.DirectStrategy;
 import exigentech.treasure.hunt.core.Distance;
 import exigentech.treasure.hunt.core.HuntingStrategy;
 import exigentech.treasure.hunt.core.NaiveStrategy;
@@ -34,7 +34,7 @@ public class ApplicationConfiguration {
   @Bean
   @ConditionalOnProperty(name = "strategy", havingValue = "direct", matchIfMissing = true)
   public HuntingStrategy singleLineStrategy(List<Distance> distances) {
-    return new DirectLineStrategy(distances);
+    return new DirectStrategy(distances);
   }
 
   @Bean

@@ -51,10 +51,12 @@ Alas, I think it's appropriate to call myself out on this. These are the main th
 * I would rename some files and scrub names to make sure they make sense, e.g. the purpose of the 
 Distance class is a bit ambiguous. Documentation would also help here.
 * I would clean up the poms by running some dependency analysis.
+* I would use the maven-enforcer-plugin and some help blurbs to add command line usage info.
 
 I made an explicit effort not to over-engineer things, but at the same time, I used this exercise as
 a chance to explore some things I had not done before, such as Spring's command-line configurations.
 I did this mostly so that the exercise would not only illustrate my experience level, but also 
-benefit me from an educational standpoint.
+benefit me from an educational standpoint. I also spent some time with junit 5 (jupiter), because it
+offers some pretty neat functionality for reducing test redundancy.
 
 Thanks for your time!

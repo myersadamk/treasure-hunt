@@ -2,7 +2,7 @@ package exigentech.treasure.hunt.app.input;
 
 import com.google.common.collect.ImmutableList;
 import exigentech.treasure.hunt.core.Distance;
-import exigentech.treasure.hunt.core.navigation.CardinalDirection;
+import exigentech.treasure.hunt.core.navigation.Direction;
 import exigentech.treasure.hunt.core.navigation.TransportMode;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -43,7 +43,7 @@ public final class FileStepSource implements StepSource {
         }
 
         builder.add(Distance.calculate(
-            CardinalDirection.valueOf(args[2]), totalDuration, TransportMode.parse(args[0]))
+            Direction.valueOf(args[2]), totalDuration, TransportMode.parse(args[0]))
         );
       }
       return builder.build();
