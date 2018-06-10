@@ -1,7 +1,7 @@
-#Treasure Hunt (@treasure-hunt)
+# Treasure Hunt (@treasure-hunt)
 See PROBLEM.md for a description of the problem domain.
 
-##Project Structure
+## Project Structure
 *treasure-hunt* is configured as  Maven Reactor project: the base directory has a parent pom.xml 
 that defines common build and dependency information, and along that are a set of Maven 
 sub-projects/modules for the actual application.
@@ -11,7 +11,7 @@ sub-projects/modules for the actual application.
 * *treasure-hunt-app* consumes the business logic module in order to expose it as a runnable
  application. 
  
-##Running/Building the Application
+## Running/Building the Application
 __System Requirements:__
 * JDK: 9.x
 * Maven: >= 3.5.x
@@ -39,7 +39,7 @@ I really like this library because it comes with so much stuff for free, and min
 lends to simpler and safer applications. The syntax is similar to Guava's ImmutableCollections API,
 and now to Java 9's new Collection factory methods, e.g. __List.of()__.
 
-##Final Notes
+## Final Notes
 Unfortunately I did end up running close to the 48 hours, partially because I discovered the input 
 file requires NW, SW, etc., and I hadn't originally accounted for that. That's regrettable for a few
 reasons: missing an input is not acceptable on a real project, and there are many ways I would clean 
