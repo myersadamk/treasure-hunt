@@ -10,5 +10,5 @@ public interface HuntingStrategy {
   /**
    * Gets the steps to follow to find a treasure according to this treasure-hunting strategy.
    */
-  List<Step> getSteps();
+  List<Distance> getDistances();
 }

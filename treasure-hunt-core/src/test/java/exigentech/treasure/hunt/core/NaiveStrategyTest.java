@@ -13,19 +13,19 @@ final class NaiveStrategyTest {
 
   @Test
   void noSteps() {
-    assertThat(new NaiveStrategy(List.of()).getSteps(), is(List.of()));
+    assertThat(new NaiveStrategy(List.of()).getDistances(), is(List.of()));
   }
 
   @Test
   void redundantSteps() {
-    final List<Step> confusedSteps = List.of(
-        Step.of(NORTH, 10),
-        Step.of(NORTH, 2),
-        Step.of(SOUTH, 4),
-        Step.of(NORTH, 4)
+    final List<Distance> confusedDistances = List.of(
+        Distance.calculate(NORTH, 10),
+        Distance.calculate(NORTH, 2),
+        Distance.calculate(SOUTH, 4),
+        Distance.calculate(NORTH, 4)
     );
 
-    assertThat(new NaiveStrategy(confusedSteps).getSteps(), is(confusedSteps));
+    assertThat(new NaiveStrategy(confusedDistances).getDistances(), is(confusedDistances));
   }
 
   @Test

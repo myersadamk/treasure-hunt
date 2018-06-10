@@ -20,6 +20,11 @@ public enum CardinalDirection implements Direction {
   }
 
   @Override
+  public String describe() {
+    return name().toLowerCase();
+  }
+
+  @Override
   public CardinalDirection opposite() {
     switch (this) {
       case NORTH:

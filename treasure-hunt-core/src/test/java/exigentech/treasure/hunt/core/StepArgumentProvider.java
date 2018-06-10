@@ -29,13 +29,13 @@ final class StepArgumentProvider implements ArgumentsProvider, AnnotationConsume
         .map(Arguments::of);
   }
 
-  private static List<Step> parseSteps(final String input) {
+  private static List<Distance> parseSteps(final String input) {
     return Arrays.stream(input.split(" "))
         .map(StepArgumentProvider::parseStep).collect(Collectors.toList());
   }
 
-  private static Step parseStep(final String input) {
-    return Step.of(
+  private static Distance parseStep(final String input) {
+    return Distance.calculate(
         CardinalDirection.parse(input.substring(0, 1)), Double.valueOf(input.substring(1))
     );
   }

@@ -10,24 +10,24 @@ import org.immutables.value.Value.Style.ImplementationVisibility;
 
 @Value.Immutable(builder = false)
 @Value.Style(allParameters = true, visibility = ImplementationVisibility.PACKAGE)
-public interface Step {
+public interface Distance {
 
   Direction getDirection();
 
   double getDistance();
 
-  static Step of(Direction direction, Duration duration, TransportMode mode) {
+  static Distance calculate(Direction direction, Duration duration, TransportMode mode) {
     checkArgument(direction != null);
     checkArgument(!Duration.ZERO.equals(duration), "Duration must be positive");
 
-    return ImmutableStep.of(direction, calculateDistance(duration, mode));
+    return ImmutableDistance.of(direction, calculateDistance(duration, mode));
   }
 
-  static Step of(Direction direction, double distance) {
+  static Distance calculate(Direction direction, double distance) {
     checkArgument(direction != null);
     checkArgument(distance > 0);
 
-    return ImmutableStep.of(direction, distance);
+    return ImmutableDistance.of(direction, distance);
   }
 
   // Style Note
@@ -44,6 +44,6 @@ public interface Step {
     checkArgument(duration != null);
     checkArgument(mode != null);
 
-    return mode.getMPH() * duration.toHours();
+    return ((double) mode.getMPH() / 60) * duration.toMinutes();
   }
 }

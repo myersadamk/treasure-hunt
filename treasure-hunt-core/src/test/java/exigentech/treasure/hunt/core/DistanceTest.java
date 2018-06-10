@@ -16,14 +16,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-final class StepTest {
+final class DistanceTest {
 
   @ParameterizedTest
   @EnumSource(CardinalDirection.class)
   void allDirectionsAreSupported(final CardinalDirection direction) {
     assertThat(
-        Step.of(direction, Duration.ofHours(1), RUN),
-        is(Step.of(direction, RUN.getMPH()))
+        Distance.calculate(direction, Duration.ofHours(1), RUN),
+        is(Distance.calculate(direction, RUN.getMPH()))
     );
   }
 
@@ -34,38 +34,49 @@ final class StepTest {
     final Duration sixHourDuration = Duration.ofHours(hours);
 
     assertThat(
-        Step.of(EAST, sixHourDuration, mode),
-        is(Step.of(EAST, hours * mode.getMPH()))
+        Distance.calculate(EAST, sixHourDuration, mode),
+        is(Distance.calculate(EAST, hours * mode.getMPH()))
     );
   }
+
+  @Test
+  void secondsDuration() {
+    final Duration twentyMinutes = Duration.ofMinutes(20);
+    assertThat(
+        Distance.calculate(EAST, twentyMinutes, TransportMode.WALK),
+        is(Distance.calculate(EAST, 1))
+    );
+  }
+
 
   @Nested
   final class ParameterValidation {
 
     @Test
     void nullDirection() {
-      assertThrows(IllegalArgumentException.class, () -> Step.of(null, Duration.ofMinutes(1), RUN));
+      assertThrows(IllegalArgumentException.class, () -> Distance
+          .calculate(null, Duration.ofMinutes(1), RUN));
     }
 
     @Test
     void nullTransportMode() {
       assertThrows(IllegalArgumentException.class,
-          () -> Step.of(NORTH, Duration.ofMinutes(1), null));
+          () -> Distance.calculate(NORTH, Duration.ofMinutes(1), null));
     }
 
     @Test
     void zeroDuration() {
-      assertThrows(IllegalArgumentException.class, () -> Step.of(NORTH, Duration.ZERO, RUN));
+      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(NORTH, Duration.ZERO, RUN));
     }
 
     @Test
     void negativeDistance() {
-      assertThrows(IllegalArgumentException.class, () -> Step.of(SOUTH, -1));
+      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(SOUTH, -1));
     }
 
     @Test
     void zeroDistance() {
-      assertThrows(IllegalArgumentException.class, () -> Step.of(SOUTH, 0));
+      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(SOUTH, 0));
     }
   }
 }

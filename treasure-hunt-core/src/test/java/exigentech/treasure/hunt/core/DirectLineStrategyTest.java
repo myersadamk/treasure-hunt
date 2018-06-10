@@ -19,7 +19,7 @@ final class DirectLineStrategyTest {
 
   @Test
   void noSteps() {
-    assertThat(new DirectLineStrategy(List.of()).getSteps(), is(empty()));
+    assertThat(new DirectLineStrategy(List.of()).getDistances(), is(empty()));
   }
 
   @Test
@@ -29,65 +29,65 @@ final class DirectLineStrategyTest {
 
   @ParameterizedTest
   @StepSource(steps = {"N2 S2", "W4 E4", "N10 E11 S10 W11"})
-  void neutralizedSteps(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(empty()));
+  void neutralizedSteps(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(empty()));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"N10", "E13", "S21", "W90"})
-  void singleStep(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(steps));
+  void singleStep(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(distances));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"N12 N14"})
-  void multipleStepsInSameDirection(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(List.of(Step.of(NORTH, 26))));
+  void multipleStepsInSameDirection(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(List.of(Distance.calculate(NORTH, 26))));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"S22 N24"})
-  void opposingVerticalSteps_North(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(List.of(Step.of(NORTH, 2))));
+  void opposingVerticalSteps_North(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(List.of(Distance.calculate(NORTH, 2))));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"S12 N2"})
-  void opposingVerticalSteps_South(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(List.of(Step.of(SOUTH, 10))));
+  void opposingVerticalSteps_South(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(List.of(Distance.calculate(SOUTH, 10))));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"E22 W24"})
-  void opposingHorizontalSteps_West(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(List.of(Step.of(WEST, 2))));
+  void opposingHorizontalSteps_West(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(List.of(Distance.calculate(WEST, 2))));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"E12 W4"})
-  void opposingHorizontalSteps_East(List<Step> steps) {
-    assertThat(applyDirectLineStrategy(steps), is(List.of(Step.of(EAST, 8))));
+  void opposingHorizontalSteps_East(List<Distance> distances) {
+    assertThat(applyDirectLineStrategy(distances), is(List.of(Distance.calculate(EAST, 8))));
   }
 
   @ParameterizedTest
   @StepSource(steps = {"E12 W4 N4"})
-  void opposingSteps_NorthEast(List<Step> steps) {
+  void opposingSteps_NorthEast(List<Distance> distances) {
     assertThat(
-        applyDirectLineStrategy(steps),
-        containsInAnyOrder(Step.of(EAST, 8), Step.of(NORTH, 4))
+        applyDirectLineStrategy(distances),
+        containsInAnyOrder(Distance.calculate(EAST, 8), Distance.calculate(NORTH, 4))
     );
   }
 
   @ParameterizedTest
   @StepSource(steps = {"N2 E4 S14 W9"})
-  void opposingSteps_SouthWest(List<Step> steps) {
+  void opposingSteps_SouthWest(List<Distance> distances) {
     assertThat(
-        applyDirectLineStrategy(steps),
-        containsInAnyOrder(Step.of(SOUTH, 12), Step.of(WEST, 5))
+        applyDirectLineStrategy(distances),
+        containsInAnyOrder(Distance.calculate(SOUTH, 12), Distance.calculate(WEST, 5))
     );
   }
 
-  private static List<Step> applyDirectLineStrategy(List<Step> steps) {
-    return new DirectLineStrategy(steps).getSteps();
+  private static List<Distance> applyDirectLineStrategy(List<Distance> distances) {
+    return new DirectLineStrategy(distances).getDistances();
   }
 }

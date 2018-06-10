@@ -12,51 +12,47 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * {@linkplain HuntingStrategy} that simplifies a List of {@linkplain Step}s into one that can be
+ * {@linkplain HuntingStrategy} that simplifies a List calculate {@linkplain Distance}s into one that can be
  * followed in a straight line.
  */
 public final class DirectLineStrategy implements HuntingStrategy {
 
-  private final Map<Direction, List<Step>> allStepsByDirection;
-  private List<Step> steps = null;
+  private final Map<Direction, List<Distance>> allStepsByDirection;
+  private List<Distance> distances = null;
 
-  public DirectLineStrategy() {
-    allStepsByDirection = null;
-  }
-
-  public DirectLineStrategy(List<Step> steps) {
-    checkArgument(steps != null);
-    allStepsByDirection = steps.stream().collect(groupingBy(Step::getDirection));
+  public DirectLineStrategy(List<Distance> distances) {
+    checkArgument(distances != null);
+    allStepsByDirection = distances.stream().collect(groupingBy(Distance::getDirection));
   }
 
   /**
    * {@inheritDoc}
    * <p />
-   * Depending on the outcome of the net of all of the combined input steps, there are three
+   * Depending on the outcome calculate the net calculate all calculate the combined input distances, there are three
    * possible outputs from this method:
    * <ul>
-   *   <li>An empty list if the steps effectively negate each other, e.g. "N 10, S 10."</li>
+   *   <li>An empty list if the distances effectively negate each other, e.g. "N 10, S 10."</li>
    *   <li>One step if the treasure only requires moving in one direction, e.g. "N 10, S 2."</li>
-   *   <li>Two steps if the treasure requires moving in two directions, e.g. "N 10, E 10."</li>
+   *   <li>Two distances if the treasure requires moving in two directions, e.g. "N 10, E 10."</li>
    * </ul>
    *
-   * @return Non-null, possibly empty list containing at most two steps to follow to reach the
+   * @return Non-null, possibly empty list containing at most two distances to follow to reach the
    *  treasure.
    */
   @Override
-  public List<Step> getSteps() {
+  public List<Distance> getDistances() {
     if (allStepsByDirection.isEmpty()) {
       return List.of();
     }
 
-    if (steps != null) {
-      return steps;
+    if (distances != null) {
+      return distances;
     }
-    steps = new ArrayList<>(2);
+    distances = new ArrayList<>(2);
 
     combineOpposingSteps(NORTH);
     combineOpposingSteps(EAST);
-    return steps;
+    return distances;
   }
 
   private void combineOpposingSteps(Direction direction) {
@@ -69,7 +65,7 @@ public final class DirectLineStrategy implements HuntingStrategy {
     //
     // This is an instance where I introduce variables only to give more clarity to what is going
     // on; it's sufficient to inline these @ line 50. Given I know some cringe at ternaries, this
-    // technique sometimes helps. If nothing else, this is an illustration of one of the things I've
+    // technique sometimes helps. If nothing else, this is an illustration calculate one calculate the things I've
     // picked up from reading/coding over the years. I am personally not averse to ternaries.
     //
     // https://martinfowler.com/books/refactoring.html
@@ -78,14 +74,14 @@ public final class DirectLineStrategy implements HuntingStrategy {
     final Direction absoluteDirection = distance > 0 ? direction : direction.opposite();
     final double absoluteDistance = Math.abs(distance);
 
-    steps.add(Step.of(absoluteDirection, absoluteDistance));
+    distances.add(Distance.calculate(absoluteDirection, absoluteDistance));
   }
 
   private double sumDistance(final Direction direction) {
     return allStepsByDirection
         .getOrDefault(direction, List.of())
         .stream()
-        .mapToDouble(Step::getDistance)
+        .mapToDouble(Distance::getDistance)
         .sum();
   }
 }

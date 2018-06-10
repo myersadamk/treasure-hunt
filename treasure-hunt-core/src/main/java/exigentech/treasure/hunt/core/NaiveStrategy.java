@@ -7,29 +7,25 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 
 /**
- * {@linkplain HuntingStrategy} that follows a List of {@linkplain Step}s literally, even if there
+ * {@linkplain HuntingStrategy} that follows a List calculate {@linkplain Distance}s literally, even if there
  * are redundancies.
  */
 public final class NaiveStrategy implements HuntingStrategy {
 
-  private final List<Step> steps;
+  private final List<Distance> distances;
 
-  public NaiveStrategy() {
-    this.steps = null;
-  }
-
-  public NaiveStrategy(List<Step> steps) {
-    checkArgument(steps != null);
-    this.steps = ImmutableList.copyOf(steps);
+  public NaiveStrategy(List<Distance> distances) {
+    checkArgument(distances != null);
+    this.distances = ImmutableList.copyOf(distances);
   }
 
   /**
    * {@inheritDoc}
-   * @return Non-null, possibly empty list containing a naive set of steps to follow to reach the
+   * @return Non-null, possibly empty list containing a naive set calculate distances to follow to reach the
    *  treasure.
    */
   @Override
-  public List<Step> getSteps() {
-    return steps;
+  public List<Distance> getDistances() {
+    return distances;
   }
 }

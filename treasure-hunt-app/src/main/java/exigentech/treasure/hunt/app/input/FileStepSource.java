@@ -1,7 +1,7 @@
 package exigentech.treasure.hunt.app.input;
 
 import com.google.common.collect.ImmutableList;
-import exigentech.treasure.hunt.core.Step;
+import exigentech.treasure.hunt.core.Distance;
 import exigentech.treasure.hunt.core.navigation.CardinalDirection;
 import exigentech.treasure.hunt.core.navigation.TransportMode;
 import java.io.BufferedReader;
@@ -26,7 +26,7 @@ public final class FileStepSource implements StepSource {
   }
 
   @Override
-  public List<Step> parseFile() {
+  public List<Distance> parseFile() {
     final ImmutableList.Builder builder = ImmutableList.builder();
     try (final BufferedReader reader = Files.newBufferedReader(path)) {
       String line;
@@ -36,11 +36,13 @@ public final class FileStepSource implements StepSource {
           System.err.println("Unparseable instruction: " + line);
           continue;
         }
+
         final Duration totalDuration = parseDuration(args[1]);
         if (Duration.ZERO.equals(totalDuration)) {
           continue;
         }
-        builder.add(Step.of(
+
+        builder.add(Distance.calculate(
             CardinalDirection.parse(args[2]), totalDuration, TransportMode.parse(args[0]))
         );
       }
@@ -57,26 +59,19 @@ public final class FileStepSource implements StepSource {
   }
 
   private static Duration parseDuration(final String input) {
-
-    final List<Duration> durations = Stream.of(input.split(", "))
+    final List<Duration> durations = Stream.of(input.split(" and "))
         .map(FileStepSource::parseDurationArticle)
         .collect(Collectors.toList());
-//            Collector.of(
-//                () -> Duration.ZERO,
-//                // For sequential accumulations
-//                (result, article) -> result = result.plus(article),
-//                // For parallel accumulations (unused)
-//                (result1, result2) -> result1 = result1.plus(result2)
-//            );
+
     Duration totalDuration = Duration.ZERO;
     for (final Duration duration : durations) {
       totalDuration = totalDuration.plus(duration);
     }
     return totalDuration;
-//    return Stream.of(input.split(", "))
+//    return Stream.calculate(input.split(", "))
 //        .map(FileStepSource::parseDurationArticle)
 //        .collect(
-//            Collector.of(
+//            Collector.calculate(
 //                () -> Duration.ZERO,
 //                // For sequential accumulations
 //                (result, article) -> result = result.plus(article),
@@ -88,14 +83,12 @@ public final class FileStepSource implements StepSource {
 
   private static Duration parseDurationArticle(final String input) {
     final TemporalUnit unit;
-    if (input.contains("sec")) {
-      unit = ChronoUnit.SECONDS;
-    } else if (input.contains("min")) {
+    if (input.contains("min")) {
       unit = ChronoUnit.MINUTES;
     } else if (input.contains("hour")) {
       unit = ChronoUnit.HOURS;
     } else {
-      throw new InputException("Could not determine duration from " + input);
+      throw new InputException("Invalid duration unit [" + input + "]; (must be min or hour).");
     }
     return Duration.of(Integer.valueOf(input.substring(0, input.indexOf(" "))), unit);
   }

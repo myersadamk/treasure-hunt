@@ -7,5 +7,7 @@ package exigentech.treasure.hunt.core.navigation;
  */
 public interface Direction  {
 
+  String describe();
+
   Direction opposite();
 }

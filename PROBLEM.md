@@ -22,7 +22,7 @@ contact me via e-mail at xxx@omitted.com.
 
 ## Problem  - Find the treasure fast!
 A treasure map was uncovered, but the map only shows the starting location. The
-path from the origin to the treasure is given as series of steps.
+path from the origin to the treasure is given as series of distances.
 
 "Walk north for 2 hours, then ride a horse at trot speed heading east for
 15 minutes..."
