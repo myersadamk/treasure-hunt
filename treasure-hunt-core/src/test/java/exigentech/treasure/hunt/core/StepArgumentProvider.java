@@ -35,8 +35,12 @@ final class StepArgumentProvider implements ArgumentsProvider, AnnotationConsume
   }
 
   private static Distance parseStep(final String input) {
+    final String[] tokenized = input.split(":");
+    if (tokenized.length != 2) {
+      throw new IllegalArgumentException("Expected format NW:2");
+    }
     return Distance.calculate(
-        CardinalDirection.parse(input.substring(0, 1)), Double.valueOf(input.substring(1))
+        CardinalDirection.valueOf(tokenized[0]), Double.valueOf(tokenized[1])
     );
   }
 }

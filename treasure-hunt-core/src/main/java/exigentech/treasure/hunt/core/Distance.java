@@ -20,6 +20,7 @@ public interface Distance {
     checkArgument(direction != null);
     checkArgument(!Duration.ZERO.equals(duration), "Duration must be positive");
 
+    System.out.println(((double) mode.getMPH() / 60) * duration.toMinutes() + ", " + direction);
     return ImmutableDistance.of(direction, calculateDistance(duration, mode));
   }
 

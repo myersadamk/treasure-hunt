@@ -5,7 +5,7 @@ import exigentech.treasure.hunt.core.HuntingStrategy;
 import java.text.DecimalFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class TreasureHunter {
+public final class TreasureHunter {
   private final HuntingStrategy strategy;
 
   static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.##");
@@ -23,6 +23,7 @@ public class TreasureHunter {
   private static void appendDescription(final Distance distance, final StringBuffer buffer) {
     buffer.append(DECIMAL_FORMAT.format(distance.getDistance()))
         .append(" miles to the ")
-        .append(distance.getDirection().describe());
+        .append(distance.getDirection().describe())
+        .append(System.lineSeparator());
   }
 }

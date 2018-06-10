@@ -43,7 +43,7 @@ public final class FileStepSource implements StepSource {
         }
 
         builder.add(Distance.calculate(
-            CardinalDirection.parse(args[2]), totalDuration, TransportMode.parse(args[0]))
+            CardinalDirection.valueOf(args[2]), totalDuration, TransportMode.parse(args[0]))
         );
       }
       return builder.build();

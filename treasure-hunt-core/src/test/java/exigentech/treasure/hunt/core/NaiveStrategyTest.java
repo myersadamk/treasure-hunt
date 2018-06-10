@@ -1,7 +1,7 @@
 package exigentech.treasure.hunt.core;
 
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.NORTH;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.SOUTH;
+import static exigentech.treasure.hunt.core.navigation.CardinalDirection.N;
+import static exigentech.treasure.hunt.core.navigation.CardinalDirection.S;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,10 +19,10 @@ final class NaiveStrategyTest {
   @Test
   void redundantSteps() {
     final List<Distance> confusedDistances = List.of(
-        Distance.calculate(NORTH, 10),
-        Distance.calculate(NORTH, 2),
-        Distance.calculate(SOUTH, 4),
-        Distance.calculate(NORTH, 4)
+        Distance.calculate(N, 10),
+        Distance.calculate(N, 2),
+        Distance.calculate(S, 4),
+        Distance.calculate(N, 4)
     );
 
     assertThat(new NaiveStrategy(confusedDistances).getDistances(), is(confusedDistances));

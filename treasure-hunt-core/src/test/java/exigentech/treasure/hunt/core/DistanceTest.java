@@ -1,8 +1,8 @@
 package exigentech.treasure.hunt.core;
 
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.EAST;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.NORTH;
-import static exigentech.treasure.hunt.core.navigation.CardinalDirection.SOUTH;
+import static exigentech.treasure.hunt.core.navigation.CardinalDirection.E;
+import static exigentech.treasure.hunt.core.navigation.CardinalDirection.N;
+import static exigentech.treasure.hunt.core.navigation.CardinalDirection.S;
 import static exigentech.treasure.hunt.core.navigation.TransportMode.RUN;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -34,8 +34,8 @@ final class DistanceTest {
     final Duration sixHourDuration = Duration.ofHours(hours);
 
     assertThat(
-        Distance.calculate(EAST, sixHourDuration, mode),
-        is(Distance.calculate(EAST, hours * mode.getMPH()))
+        Distance.calculate(E, sixHourDuration, mode),
+        is(Distance.calculate(E, hours * mode.getMPH()))
     );
   }
 
@@ -43,8 +43,8 @@ final class DistanceTest {
   void secondsDuration() {
     final Duration twentyMinutes = Duration.ofMinutes(20);
     assertThat(
-        Distance.calculate(EAST, twentyMinutes, TransportMode.WALK),
-        is(Distance.calculate(EAST, 1))
+        Distance.calculate(E, twentyMinutes, TransportMode.WALK),
+        is(Distance.calculate(E, 1))
     );
   }
 
@@ -61,22 +61,22 @@ final class DistanceTest {
     @Test
     void nullTransportMode() {
       assertThrows(IllegalArgumentException.class,
-          () -> Distance.calculate(NORTH, Duration.ofMinutes(1), null));
+          () -> Distance.calculate(N, Duration.ofMinutes(1), null));
     }
 
     @Test
     void zeroDuration() {
-      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(NORTH, Duration.ZERO, RUN));
+      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(N, Duration.ZERO, RUN));
     }
 
     @Test
     void negativeDistance() {
-      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(SOUTH, -1));
+      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(S, -1));
     }
 
     @Test
     void zeroDistance() {
-      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(SOUTH, 0));
+      assertThrows(IllegalArgumentException.class, () -> Distance.calculate(S, 0));
     }
   }
 }
