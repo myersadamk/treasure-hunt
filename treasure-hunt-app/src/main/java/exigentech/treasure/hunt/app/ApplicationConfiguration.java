@@ -11,14 +11,24 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfiguration {
 
   @Bean
-  @ConditionalOnProperty(name = "strategy", havingValue = "directline", matchIfMissing = true)
-  public HuntingStrategy singleLineStrategy() {
-    return new DirectLineStrategy(null);
+  public TreasureHunter treasureHunter(HuntingStrategy strategy) {
+    return new TreasureHunter(strategy);
   }
 
   @Bean
+//  @ConditionalOnExpression(value = "${strategy}=naive")
+  @ConditionalOnProperty(name = "strategy", havingValue = "direct", matchIfMissing = true)
+  public HuntingStrategy singleLineStrategy() {
+
+//    System.out.println(strategy);
+    System.out.println("direct!");
+    return new DirectLineStrategy();
+  }
+//
+  @Bean
   @ConditionalOnProperty(name = "strategy", havingValue = "naive")
   public HuntingStrategy naiveStrategy() {
-    return new NaiveStrategy(null);
+    System.out.println("naive!");
+    return new NaiveStrategy();
   }
 }

@@ -13,11 +13,6 @@
   </modules>
   <dependencies>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>5.0.6.RELEASE</version>
-    </dependency>
-    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>RELEASE</version>
@@ -57,6 +52,23 @@
         <configuration>
           <source>1.9</source>
           <target>1.9</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>1.2.7.RELEASE</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>exigentech.treasure.hunt.app.Application</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>

@@ -5,16 +5,18 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-import org.springframework.stereotype.Component;
 
 /**
  * {@linkplain HuntingStrategy} that follows a List of {@linkplain Step}s literally, even if there
  * are redundancies.
  */
-@Component
 public final class NaiveStrategy implements HuntingStrategy {
 
   private final List<Step> steps;
+
+  public NaiveStrategy() {
+    this.steps = null;
+  }
 
   public NaiveStrategy(List<Step> steps) {
     checkArgument(steps != null);

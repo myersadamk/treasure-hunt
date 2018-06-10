@@ -16,7 +16,6 @@ public interface Execution {
     return false;
   }
 
-  @Default
   default Optional<String> filePath() {
     return Optional.empty();
   }

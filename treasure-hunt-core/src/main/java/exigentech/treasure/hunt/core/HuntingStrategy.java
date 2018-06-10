@@ -1,12 +1,10 @@
 package exigentech.treasure.hunt.core;
 
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  * Defines a strategy for treasure hunting.
  */
-@Service
 public interface HuntingStrategy {
 
   /**
