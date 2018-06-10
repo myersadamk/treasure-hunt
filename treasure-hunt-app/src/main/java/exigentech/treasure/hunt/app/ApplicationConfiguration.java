@@ -22,6 +22,16 @@ public class ApplicationConfiguration {
   }
 
   @Bean
+  public List<Distance> getInputSteps(FileStepSource source) {
+    return source.parseFile();
+  }
+
+  @Bean
+  public FileStepSource fileStepSource(@Value("${path}") String path) {
+    return new FileStepSource(path);
+  }
+
+  @Bean
   @ConditionalOnProperty(name = "strategy", havingValue = "direct", matchIfMissing = true)
   public HuntingStrategy singleLineStrategy(List<Distance> distances) {
     return new DirectLineStrategy(distances);
@@ -31,15 +41,5 @@ public class ApplicationConfiguration {
   @ConditionalOnProperty(name = "strategy", havingValue = "naive")
   public HuntingStrategy naiveStrategy(List<Distance> distances) {
     return new NaiveStrategy(distances);
-  }
-
-  @Bean
-  public List<Distance> getInputSteps(FileStepSource source) {
-    return source.parseFile();
-  }
-
-  @Bean
-  public FileStepSource fileStepSource(@Value("${path}") String path) {
-    return new FileStepSource(path);
   }
 }

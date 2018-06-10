@@ -120,10 +120,10 @@ public final class DirectLineStrategy implements HuntingStrategy {
   }
 
   private void addExpandedDistances(final Direction x, final Distance distance) {
-    if (allDistancesByDirection.containsKey(x)) {
-      allDistancesByDirection.get(x).add(Distance.calculate(x, distance.getDistance()));
-    } else {
-      allDistancesByDirection.put(x, List.of(Distance.calculate(x, distance.getDistance())));
-    }
+    final List<Distance> updatedList = allDistancesByDirection.getOrDefault(x, new ArrayList<>());
+    updatedList.add(Distance.calculate(x, distance.getDistance()));
+    // TODO: this is horribly optimized (the backing list is immutable so it's necessary). This
+    // can definitely be improved but I'm low on time.
+    allDistancesByDirection.put(x, updatedList);
   }
 }

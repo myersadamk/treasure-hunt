@@ -33,7 +33,7 @@ public final class FileStepSource implements StepSource {
       while ((line = reader.readLine()) != null) {
         final String[] args = line.split(", ");
         if (args.length != 3) {
-          System.err.println("Unparseable instruction: " + line);
+          System.err.println("Unparsable instruction: " + line);
           continue;
         }
 
@@ -68,17 +68,6 @@ public final class FileStepSource implements StepSource {
       totalDuration = totalDuration.plus(duration);
     }
     return totalDuration;
-//    return Stream.calculate(input.split(", "))
-//        .map(FileStepSource::parseDurationArticle)
-//        .collect(
-//            Collector.calculate(
-//                () -> Duration.ZERO,
-//                // For sequential accumulations
-//                (result, article) -> result = result.plus(article),
-//                // For parallel accumulations (unused)
-//                (result1, result2) -> result1 = result1.plus(result2)
-//            )
-//        );
   }
 
   private static Duration parseDurationArticle(final String input) {
