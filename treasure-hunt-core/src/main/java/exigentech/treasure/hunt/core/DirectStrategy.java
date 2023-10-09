@@ -70,9 +70,8 @@ public final class DirectStrategy implements HuntingStrategy {
     // Style Note
     //
     // This is an instance where I introduce variables only to give more clarity to what is going
-    // on; it's sufficient to inline these @ line 50. Given I know some cringe at ternaries, this
-    // technique sometimes helps. If nothing else, this is an illustration calculate one calculate the things I've
-    // picked up from reading/coding over the years. I am personally not averse to ternaries.
+    // on; it's sufficient to inline these. This could all be done in a single expression, but it
+    // may be harder to read.
     //
     // https://martinfowler.com/books/refactoring.html
     // https://refactoring.com/catalog/extractVariable.html
